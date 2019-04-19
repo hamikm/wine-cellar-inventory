@@ -4,8 +4,7 @@ Wine cellar inventory with QR codes in a simple web app.
 ![alt text](/baileyscellar.gif)
 
 ## How do I use this?
-This project was written just for personal use, so I created [Cellar Project](https://cellarproject.com), which has a nicer interface, allows you to register for a free account, and sends you QR codes in the mail so you don't have to figure out how to print them. Cellar Project is still closed-source, but this repo contains code for its predecessor, which is shown in the GIF above. I originally posted this project [here on r/wine](https://www.reddit.com/r/wine/comments/auuh6a/finally_figured_out_how_to_get_my_wife_to_check/).
-
+This hacky, homely little project was written just for personal use in my cellar. That's why I beautified and productionized it into [Cellar Project](https://cellarproject.com), which has a nicer interface, supports infinite users, and sends you QR codes in the mail so you don't have to generate and print your own. Cellar Project is still closed-source, but this repo contains code for its predecessor, which is shown in the GIF above. I originally posted this project [here on r/wine](https://www.reddit.com/r/wine/comments/auuh6a/finally_figured_out_how_to_get_my_wife_to_check/).
 
 If you want to use this CRUDdy old web app - haha, get it? - you'll need to do the following.
 
