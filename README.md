@@ -22,9 +22,6 @@ Buy some sticker sheets. The sticker in the video is 1.5" in diameter, which I t
 ### Populate your database
 Get a printed sticker and put it on your bottle. Scan the label to open the web app - the default camera app in iOS can do it. Fill in the add form.
 
-## The stack
-HTML/CSS frontend with light usage of JQuery. AWS backend with a single lambda function, a single DynamoDB table, and Cognito authentication. QR codes are generated with a Python script.
-
 ## Drinkability classification
 When an entry doesn't have a lower and upper drink-by year, I consider it
 * "mature" up to three years after vintage
@@ -49,3 +46,6 @@ A wine with a lower and upper year is considered
 2. The code isn't minified or otherwise obfuscated before deployment.
 3. The code that generates the table in `webapp/js/baileys-cellar-webapp.js` is super hacky. I wrote "light usage of JQuery" above because JQuery should be used instead of whatever I did 🙃
 4. PWA support is incomplete because there's no service worker.
+
+## License
+This project is licensed under the MIT License.
