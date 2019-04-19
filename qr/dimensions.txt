@@ -1,0 +1,8 @@
+avery 1.5" circular sticker sheet:
+  - left, top margins: 0.5" 0.75"
+  - x, y spacing: 0.5", 0.5"
+  - rows, cols: 5, 4
+  - for squares nested inside the circles:
+    - left, top margins: 0.7196699" 0.9696699"
+    - x, y spacing: 0.93933982822"
+    - square width/height: 1.06066"

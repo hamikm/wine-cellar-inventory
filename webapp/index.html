@@ -1,0 +1,250 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <!-- maximum-scale=1 keeps mobile browsers from annoyingly zooming in when
+        user taps on form fields -->
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+
+    <!-- Generic icons -->
+    <link rel="icon" href="img/icon-32.png" sizes="32x32">
+    <link rel="icon" href="img/icon-57.png" sizes="57x57">
+    <link rel="icon" href="img/icon-76.png" sizes="76x76">
+    <link rel="icon" href="img/icon-96.png" sizes="96x96">
+    <link rel="icon" href="img/icon-128.png" sizes="128x128">
+    <link rel="icon" href="img/icon-192.png" sizes="192x192">
+    <link rel="icon" href="img/icon-228.png" sizes="228x228">
+    <link rel="icon" href="img/icon-512.png" sizes="512x512">
+
+    <!-- Android icons -->
+    <link rel="shortcut icon" href="img/icon-196.png" sizes="196x196">
+
+    <!-- iOS PWA icons. iOS caches icons, so when icon is changed the version
+        # in the param in the filename has to get bumped -->
+    <link rel="apple-touch-icon" href="touch-icon-iphone.png?v=2">
+    <link rel="apple-touch-icon" sizes="180x180" href="touch-icon-iphone-180.png?v=2">
+
+    <!-- Windows 8 IE 10-->
+    <meta name="msapplication-TileColor" content="#FFFFFF">
+    <meta name="msapplication-TileImage" content="img/icon-144.png">
+
+    <!-- Windows 8.1 + IE11 and above -->
+    <meta name="msapplication-config" content="img/browserconfig.xml">
+
+    <!-- Makes the status bar (top bar) on iOS PWAs same color as body instead of plain white -->
+    <meta name="apple-mobile-web-app-status-bar-style" content="default">
+
+    <!-- For PWA. Need more (https and service workers) before PWA will work) -->
+    <link rel="manifest" href="manifest.json">
+
+    <!-- I pulled a small number of font awesome icons into this font file to
+        keep from introducing an external dependency or downloading the huge all.js -->
+    <link href="fontstyle.css" rel="stylesheet" type="text/css" media="all">
+
+    <!-- Style sheet for this web app -->
+    <link href="cellar-style.css" rel="stylesheet" type="text/css">
+
+    <title>Bailey's Cellar</title>
+</head>
+
+<body>
+    <!-- Long, skinny rectangles on left and right side of screen. Used to
+        obscure overflowing sticker header -->
+    <div class="lefttallrectangle"></div>
+    <div class="righttallrectangle"></div>
+
+    <!-- A modal that looks like an iOS Safari alert. Used for messages like
+        errors and confirmation dialogs -->
+    <div id="my_modal" class="modal">
+        <div class="modal-content">
+            <p id="modal_text"></p>
+            <div id="modal_close_button" class="confirmmodalbuttons">
+                <button class="cancelbutton iosstylebutton" onclick="cancelModal()">Close</button>
+            </div>
+            <div id="modal_confirm_buttons" class="confirmmodalbuttons">
+                <button class="okbutton iosstylebutton" onclick="okModal()">OK</button>
+                <button class="cancelbutton iosstylebutton" onclick="cancelModal()">Cancel</button>
+            </div>
+        </div>
+    </div>
+
+    <!-- Username/password form whose visibility is toggled off after login -->
+    <div id="login_block" class="loginblock">
+        <div class="loginblockcontents">
+            <img class="logoimg" src="img/pup_trans.svg" />
+            <form>
+                <div class="fieldcontainer loginfield">
+                    <input class="fieldwidth" id="username" type="text" onfocus="clearRedLoginColor()"
+                        placeholder="Username">
+                </div>
+                <div class="fieldcontainer loginfield">
+                    <input class="fieldwidth" id="pw" type="password" onfocus="clearRedLoginColor()"
+                        placeholder="Password">
+                </div>
+                <div class="toppadding fieldcontainer">
+                    <input class="iosstylebutton okbutton" type="button" onclick="authenticate()" value="Log in">
+                </div>
+            </form>
+        </div>
+    </div>
+
+    <!-- Content of web app. Visibility is toggled on after login -->
+    <div id="content_block" style="display:none">
+
+        <!-- Section for adding or editing a bottle -->
+        <div id="add_form_block" class="formblock">
+
+            <!-- Title of add/edit section. Can be clicked to collapse/expand form -->
+            <button class="transparentbutton headerbutton sectionheadertext" onclick="toggleAddForm()">
+                <span id="add_header">&nbsp;Add&nbsp;</span>
+            </button>
+            <button class="transparentbutton headerbutton" onclick="toggleAddForm()">
+                <span id="add_form_chevron" class="icon-chevron-up headericon sectionheadertext"></span>
+            </button>
+
+            <!-- Add form -->
+            <form class="section" id="add_form">
+                <div class="fieldcontainer">
+                    <label class="rightpadding">Vineyard</label>
+                    <input class="fieldwidth" id="Vineyard" type="text" placeholder="">
+                </div>
+                <div class="fieldcontainer">
+                    <label class="rightpadding">Varietal</label>
+                    <input class="fieldwidth" id="Varietal" type="text" placeholder="">
+                </div>
+                <div class="fieldcontainer">
+                    <label class="rightpadding">Vintage</label>
+                    <input class="fieldwidth" id="Vintage" type="number" placeholder="">
+                </div>
+                <div class="fieldcontainer">
+                    <label class="rightpadding">Name</label>
+                    <input class="fieldwidth" id="Name" type="text" placeholder="">
+                </div>
+                <div class="fieldcontainer">
+                    <label class="rightpadding">Price</label>
+                    <input class="fieldwidth" id="Price" type="number" placeholder="">
+                </div>
+                <div class="fieldcontainer">
+                    <label class="rightpadding">Drink</label>
+                    <input class="mediumfieldwidth" id="Lower" type="number" placeholder="from">
+                    <input class="mediumfieldwidth" style="width:109px" id="Upper" type="number" placeholder="to">
+                </div>
+                <div class="fieldcontainer">
+                    <label class="rightpadding">Location</label>
+                    <input class="shortfieldwidth" id="add_area" style="width:70px" type="text" placeholder="area">
+                    <input class="shortfieldwidth" id="add_row" type="number" placeholder="row">
+                    <input class="shortfieldwidth" id="add_col" type="text" placeholder="col">
+                </div>
+                <div class="fieldcontainer">
+                    <label class="rightpadding">Bottle #</label>
+                    <input class="fieldwidth" id="add_bottle_num" type="number" placeholder="">
+                </div>
+                <div class="fieldcontainer">
+                    <label class="rightpadding">Comments</label>
+                    <textarea class="fieldwidth" id="add_comments" placeholder="" rows="4"></textarea>
+                </div>
+
+                <!-- Cancel, Clear, and Add buttons -->
+                <div class="toppadding fieldcontainer">
+                    <label class="rightpadding">&nbsp;</label>
+                    <input type="button" id="add_button" class="iosstylebutton okbutton" onclick="add()" value="Add">
+                    <input type="button" id="add_clear_button" class="rightpadding iosstylebutton cancelbutton"
+                        style="display:block" onclick="clearAddForm()" value="Clear">
+                    <input type="button" id="edit_cancel_button" class="rightpadding iosstylebutton cancelbutton"
+                        style="display:none" onclick="exitEditMode()" value="Cancel">
+                </div>
+            </form>
+        </div>
+
+        <!-- Section for searching for bottles -->
+        <div id="query_form_block" class="formblock">
+
+            <!-- Title of search section. Can be clicked to collapse/expand form -->
+            <button class="transparentbutton headerbutton sectionheadertext" onclick="toggleQueryForm()">
+                <span id="add_header">&nbsp;Search&nbsp;</span>
+            </button>
+            <button class="transparentbutton headerbutton" onclick="toggleQueryForm()">
+                <span id="query_form_chevron" class="icon-chevron-up headericon sectionheadertext"></span>
+            </button>
+
+            <!-- Search form -->
+            <form class="section" id="form">
+
+                <!-- Checkbox for "is bottle still racked" -->
+                <div class="fieldcontainer">
+                    <label class="rightpadding">Unopened</label>
+                    <input type="checkbox" id="unopened_checkbox" checked>
+                </div>
+
+                <!-- Dropdown menu for drinkability -->
+                <div class="fieldcontainer">
+                    <label class="rightpadding">Drinking</label>
+                    <select id="drinkability_attribute">
+                        <option value="INVALID"></option>
+                        <option value="undrinkable">Not yet drinkable</option>
+                        <option value="young">Young</option>
+                        <option value="mature">Mature</option>
+                        <option value="drink_soon">Drink soon</option>
+                        <option value="past_prime">Past prime</option>
+                    </select>
+                </div>
+
+                <div class="fieldcontainer">
+                    <label class="rightpadding">Vineyard</label>
+                    <input class="fieldwidth" id="vineyard_value" type="text" placeholder="">
+                </div>
+                <div class="fieldcontainer">
+                    <label class="rightpadding">Varietal</label>
+                    <input class="fieldwidth" id="varietal_value" type="text" placeholder="">
+                </div>
+                <div class="fieldcontainer">
+                    <label class="rightpadding">Vintage</label>
+                    <input class="fieldwidth" id="vintage_value" type="number" placeholder="">
+                </div>
+                <div class="fieldcontainer">
+                    <label class="rightpadding">Name</label>
+                    <input class="fieldwidth" id="name_value" type="text" placeholder="">
+                </div>
+                <div class="fieldcontainer">
+                    <label class="rightpadding">Price</label>
+                    <input class="mediumfieldwidth" id="price_lower_value" type="number" placeholder="from">
+                    <input class="mediumfieldwidth" style="width:109px" id="price_upper_value" type="number"
+                        placeholder="to">
+                </div>
+                <div class="fieldcontainer">
+                    <label class="rightpadding">Location</label>
+                    <input class="shortfieldwidth" style="width:70px" id="area_value" type="text" placeholder="area">
+                    <input class="shortfieldwidth" id="row_value" type="number" placeholder="row">
+                    <input class="shortfieldwidth" id="column_value" type="text" placeholder="col">
+                </div>
+                <div class="fieldcontainer">
+                    <label class="rightpadding">Bottle #</label>
+                    <input class="fieldwidth" id="search_bottle_num" type="number" placeholder="">
+                </div>
+
+                <!-- Clear and Search buttons -->
+                <div class="toppadding fieldcontainer">
+                    <label class="rightpadding">&nbsp;</label>
+                    <input type="button" class="iosstylebutton okbutton" onclick="query()" value="Search">
+                    <input type="button" id="query_clear_button" class="rightpadding iosstylebutton cancelbutton"
+                        onclick="clearQueryForm()" value="Clear">
+                </div>
+            </form>
+        </div>
+
+        <!-- Search results table -->
+        <div id="count_div"></div>
+        <div id="table_div" class="searchtablecontainer"></div>
+    </div>
+
+    <!-- Libraries -->
+    <script src="js/jquery-3.3.1.min.js"></script>
+    <script src="js/jquery.stickytableheaders.min.js"></script>
+    <script src="js/aws-cognito-sdk.min.js"></script>
+    <script src="js/amazon-cognito-identity.min.js"></script>
+
+    <!-- Logic for this web app -->
+    <script src="js/baileys-cellar-webapp.js"></script>
+</body>
+
+</html>

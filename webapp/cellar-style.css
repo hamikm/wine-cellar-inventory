@@ -1,0 +1,284 @@
+:root {
+    --button-blue: rgb(18, 126, 251);
+    --transparent-color: rgba(0, 0, 0, 0);
+    --grey-background-color: #ffffff;
+    --lightergrey: #f2f2f2;
+}
+
+* {
+    font-family: 'Times New Roman', Times, serif;
+}
+
+body {
+    background-color: var(--grey-background-color);
+    margin-left: 8px;
+    margin-right: 8px;
+}
+
+label {
+    float: left;
+    clear: left;
+    width: 83px;
+    text-align: right;
+}
+
+input {
+    float: left;
+    border-width: 1px;
+    border-color: lightgrey;
+    border-style: solid;
+    font-size: 90%;
+    background-color: var(--grey-background-color);
+}
+
+input[type="button"] {
+    padding-top: 1px;
+    padding-bottom: 1px;
+    padding-left: 5px;
+    padding-right: 5px;
+}
+
+textarea {
+    border-width: 1px;
+    border-color: lightgrey;
+    resize: none;
+    padding: 1px;
+    vertical-align: top;
+    font-size: 90%;
+    background-color: var(--grey-background-color);
+}
+
+select {
+    float: left;
+    background-color: var(--grey-background-color);
+
+    /* Includes padding and border of fieldwidth b/c none for select */
+    width: 234px;
+}
+
+form {
+    clear: left;
+}
+
+div {
+    clear: left;
+}
+
+.rightpadding {
+    margin-right: 0.5em;
+}
+
+.toppadding {
+    padding-top: 0.5em;
+}
+
+.fieldcontainer {
+    overflow: hidden;
+    /* so parent divs don't have zero height */
+}
+
+.fieldwidth {
+    width: 226px;
+    padding-left: 3px;
+    padding-right: 3px;
+    padding-top: 1px;
+    padding-bottom: 1px;
+}
+
+.mediumfieldwidth {
+    width: 108px;
+    padding-left: 3px;
+    padding-right: 3px;
+    padding-top: 1px;
+    padding-bottom: 1px;
+    margin-right: 1px;
+}
+
+.shortfieldwidth {
+    width: 69px;
+    padding-left: 3px;
+    padding-right: 3px;
+    padding-top: 1px;
+    padding-bottom: 1px;
+    margin-right: 1px;
+}
+
+.transparentbutton {
+    border-width: 0px;
+    background-color: var(--transparent-color);
+}
+
+.section {
+    margin-top: 0.5em;
+}
+
+.sectionheadertext {
+    font-size: 140%;
+    font-weight: bold;
+}
+
+.headerbutton {
+    display: inline;
+    padding: 0;
+}
+
+.headericon {
+    color: lightgrey;
+}
+
+.modal {
+    display: none;
+    position: fixed;
+    width: 100%;
+    height: 100%;
+    top: 0;
+    left: 0;
+    z-index: 999;
+    overflow: auto;
+    background-color: rgb(0, 0, 0);
+    /* Fallback color */
+    background-color: rgba(0, 0, 0, 0.4);
+    /* Black w/ opacity */
+}
+
+.modal-content {
+    background-color: var(--grey-background-color);
+    margin: auto;
+    padding: 20px;
+    border: 1px solid #888;
+    width: 80%;
+    border-radius: 20px;
+    position: fixed;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+}
+
+.confirmmodalbuttons {
+    display: none;
+    overflow: hidden;
+}
+
+.iosstylebutton {
+    font-size: 100%;
+    color: var(--button-blue);
+    border-width: 0px;
+    background-color: var(--transparent-color);
+}
+
+.okbutton {
+    /* for buttons in modals */
+    font-weight: bold;
+    float: right;
+}
+
+.cancelbutton {
+    /* for buttons in modals */
+    float: right;
+    margin-right: 1em;
+}
+
+.actionbutton {
+    padding-left: 5px;
+    padding-right: 5px;
+}
+
+.actionicon {
+    font-size: 75%;
+}
+
+.loginblock {
+    position: fixed;
+    width: 100%;
+    height: 100%;
+    top: 0;
+    left: 0;
+}
+
+.loginblockcontents {
+    margin: auto;
+    position: fixed;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    display: table;
+    /* so doesn't take up whole width */
+}
+
+.loginfield {
+    margin-bottom: 1px;
+}
+
+.formblock {
+    display: table;
+    /* forces width not to be 100% of page */
+    margin-bottom: 0.5em;
+}
+
+.logoimg {
+    max-width: 200px;
+    /* a little less wide than login field box */
+    display: block;
+    margin-left: auto;
+    margin-right: auto;
+    margin-bottom: 1px;
+}
+
+.searchtablecontainer {
+    display: block;
+    overflow-x: auto;
+    white-space: nowrap;
+    border-collapse: collapse;
+}
+
+.searchtable {
+    border-collapse: collapse;
+}
+
+.searchthead {
+    background-color: var(--grey-background-color);
+    border-bottom: 1px solid lightgrey;
+}
+
+.searchth {
+    padding-left: 3px;
+    padding-right: 3px;
+}
+
+.searchtd {
+    padding: 3px;
+    border: none;
+}
+
+.searchtdactions {
+    padding-left: 3px;
+    padding-right: 3px;
+    white-space: nowrap;
+    border: none;
+}
+
+#querytable tr:nth-child(even) {
+    background-color: var(--lightergrey);
+}
+
+.lefttallrectangle {
+    width: 8px;
+    height: 800px;
+    position: fixed;
+    left: 0;
+    top: 0;
+    z-index: 5;
+    /* sticky table header is 3 */
+    background-color: var(--grey-background-color);
+}
+
+.righttallrectangle {
+    width: 8px;
+    height: 800px;
+    position: fixed;
+    right: 0;
+    top: 0;
+    z-index: 5;
+    /* sticky table header is 3 */
+    background-color: var(--grey-background-color);
+}
