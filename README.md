@@ -14,7 +14,7 @@ If you want to use this CRUDdy old web app - haha, get it? - you'll need to do t
 4. **Populate your database.** Get a printed sticker and put it on your bottle. Scan the label to open the web app - the default camera app in iOS can do it. Fill in the add form.
 
 ## The stack
-HTML/CSS frontend with light usage of JQuery. AWS backend with a single lambda function, a single DynamoDB table, and Cognito authentication. QR codes are generated with a python script.
+HTML/CSS frontend with light usage of JQuery. AWS backend with a single lambda function, a single DynamoDB table, and Cognito authentication. QR codes are generated with a Python script.
 
 ## Drinkability classification
 When an entry doesn't have a lower and upper drink-by year, I consider it
@@ -34,10 +34,9 @@ A wine with a lower and upper year is considered
 1. Credentials aren't cached on the frontend, so you have to login every time you refresh. You also have to play with code every time you add a user - by uncommenting and recommenting `newPasswordRequired` - which is a pain.
 2. QR codes encode passwords in plain-text. That's obviously horrible, but then I wrote this for exactly two users 😅. That means that if your friends want to be giant buttholes, they can log into your account and wreak havoc after you open a bottle with them. Not that, uh, my friends are giant buttholes...
 3. The cellar database isn't backed up programmatically.
-4. Some people who actually know things about wine - unlike the author - might take issue with the way I classify the drinkability of wine. See below.
 
 ### For developers
-1. There is no programmatic deployment, so you have to copy paste the lambda's contents and drag-drop the frontend code into S3. Ideally the lambda would be deployed with Serverless and the frontend would be deployed with a simple script containing an AWS CLI S3 command.
-2. The code isn't minified or uglified before deployment.
+1. There is no programmatic deployment, so you have to copy-paste the lambda's contents and drag-drop the frontend code into S3. Ideally the lambda would be deployed with Serverless and the frontend would be deployed with a simple script containing an AWS CLI command.
+2. The code isn't minified or otherwise obfuscated before deployment.
 3. The code that generates the table in `webapp/js/baileys-cellar-webapp.js` is super hacky. I wrote "light usage of JQuery" above because JQuery should be used instead of whatever I did 🙃
-4. PWA - progressive web app - support is incomplete because there's no service worker.
+4. PWA support is incomplete because there's no service worker.
