@@ -44,7 +44,7 @@ A wine with a lower and upper year is considered
 ### For developers
 1. There is no programmatic deployment, so you have to copy-paste the lambda's contents and drag-drop the frontend code into S3. Ideally the lambda would be deployed with Serverless and the frontend would be deployed with a simple script containing an AWS CLI command.
 2. The code isn't minified or otherwise obfuscated before deployment.
-3. The code that generates the table in `webapp/js/baileys-cellar-webapp.js` is super hacky. I wrote "light usage of JQuery" above because JQuery should be used instead of whatever I did 🙃
+3. The code that generates the table in `webapp/js/baileys-cellar-webapp.js` is super hacky. JQuery or something else should be used instead of whatever I did 🙃
 4. PWA support is incomplete because there's no service worker.
 
 ## License
