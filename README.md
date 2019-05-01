@@ -38,7 +38,7 @@ A wine with a lower and upper year is considered
 ## Limitations
 ### For end users
 1. Credentials aren't cached on the frontend, so you have to login every time you refresh. You also have to play with code every time you add a user - by uncommenting and recommenting `newPasswordRequired` - which is a pain.
-2. QR codes encode passwords in plain-text. That's obviously horrible, but then I wrote this for exactly two users 😅. That means that if your friends want to be giant buttholes, they can log into your account and wreak havoc after you open a bottle with them. Not that, uh, my friends are giant buttholes...
+2. QR codes encode passwords in plain-text. That's obviously horrible, but then I wrote this for exactly two users 😅. That means that if your friends want to be giant assholes, they can log into your account and wreak havoc after you open a bottle with them. Not that, uh, my friends are giant assholes...
 3. The cellar database isn't backed up programmatically.
 
 ### For developers
